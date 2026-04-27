@@ -1,4 +1,5 @@
-import asyncio
+
+зщ
 import logging
 from datetime import datetime, timedelta
 from aiogram import Bot, Dispatcher, types, F
@@ -399,49 +400,5 @@ async def show_profile(message: Message):
 @dp.message(F.text == "🔄 Сменить пол")
 async def change_gender(message: Message):
     user_id = message.from_user.id
-    if user_id not in users:
-        await message.answer("/start")
-        return
-    await message.answer(
-        "👤 Выбери новый пол:",
-        reply_markup=InlineKeyboardMarkup(inline_keyboard=[
-            [
-                InlineKeyboardButton(text="🙋‍♀️ Девушка", callback_data="change_female"),
-                InlineKeyboardButton(text="🙋‍♂️ Парень", callback_data="change_male"),
-            ]
-        ])
-    )
-
-@dp.callback_query(F.data.startswith("change_"))
-async def confirm_change_gender(callback: CallbackQuery):
-    user_id = callback.from_user.id
-    new_gender = "female" if callback.data == "change_female" else "male"
-    users[user_id]["пол"] = new_gender
-    await callback.message.edit_text(f"✅ Пол изменён на {'Девушка' if new_gender == 'female' else 'Парень'}.")
-
-# ========== WEBHOOK НАСТРОЙКА ==========
-async def set_webhook():
-    await bot.set_webhook(url=WEBHOOK_HOST + WEBHOOK_PATH)
-
-async def on_startup(app):
-    await set_webhook()
-    logging.info("Webhook установлен")
-
-async def on_shutdown(app):
-    await bot.delete_webhook()
-    logging.info("Webhook удалён")
-
-# ========== ЗАПУСК ==========
-def main():
-    logging.basicConfig(level=logging.INFO)
-    app = web.Application()
-    webhook_requests_handler = SimpleRequestHandler(dispatcher=dp, bot=bot)
-    webhook_requests_handler.register(app, path=WEBHOOK_PATH)
-    setup_application(app, dp, bot=bot)
-    app.on_startup.append(on_startup)
-    app.on_shutdown.append(on_shutdown)
-    web.run_app(app, host="0.0.0.0", port=8000)
-
-if __name__ == "__main__":
-    main()
+    if user_id not in 
     
